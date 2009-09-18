@@ -1,9 +1,9 @@
 %
 % GCHORDS, a LaTeX2e package to draw guitar chord diagrams.
 %
-% $Id: gchords.sty,v 1.17 2006/09/17 15:15:58 peekas Exp $
+% $Id: gchords.sty,v 1.20 2009/02/04 20:25:59 peekas Exp $
 % 
-% Copyright (C) 2001-2006 Kasper Peeters <kasper.peeters@aei.mpg.de>
+% Copyright (C) 2001-2009 Kasper Peeters <kasper.peeters@aei.mpg.de>
 % Available under the GNU General Public License.
 %
 %    - minor additions by D. R. Lovell, 05-nov-1998
@@ -11,6 +11,7 @@
 %    - bug fix by Brent Lievers, 23-sep-2002
 %    - minor additions by P. Margarita, 14-aug-2003
 %    - bug fix with f0 (thumb), thanks to Andreas Griewank, 15-jan-2005
+%    - added optional open string marker, 3-feb-2008
 %
 % See ChangeLog for a list of changes. 
 %
@@ -35,7 +36,8 @@
 \font\fingerfont=cmr5    % font used for numbering fingers
 \font\namefont=cmr10     % font used for labeling of the chord
 \font\fretposfont=cmr7   % font used for the fret position marker
-\def\dampsymbol{$\scriptstyle\times$}    % symbol of the `damp this string' marker
+\def\dampsymbol{$\scriptstyle\times$}    % symbol of the `damp this % string' marker
+\def\opensymbol{$\scriptstyle\circ$}     % symbol of the `open string' marker
 }
 \newcommand\smallchords{
 \def\chordsize{2.0mm}    % distance between two frets (and two strings)
@@ -43,18 +45,20 @@
 \font\namefont=cmr10     % font used for labeling of the chord
 \font\fretposfont=cmr7   % font used for the fret position marker
 \def\dampsymbol{$\scriptstyle\times$}    % symbol of the `damp this string' marker
+\def\opensymbol{$\scriptstyle\circ$}     % symbol of the `open string' marker
 }
 
 \smallchords
 
-% Dotsizes (which scale with the chordsize macro)
+% Dot and line sizes (which scale with the chordsize macro)
 
-\newcommand\fatsiz{1.6}         % size of a fat note
+\newcommand\fatsiz{1.6}          % size of a fat note
 % Changed by Margarita
-%\newcommand\lenbar{2.0}          % lenght of sixth part of barré
-\newcommand\normalsiz{1.2}      % size of a normal note
-\newcommand\fingsiz{1.4}      % size of the circle around a numbered finger
+%\newcommand\lenbar{2.0}         % lenght of sixth part of barré
+\newcommand\normalsiz{1.2}       % size of a normal note
+\newcommand\fingsiz{1.4}         % size of the circle around a numbered finger
 \newcommand\fatfingsiz{1.8}      % size of the circle around a numbered finger
+\newcommand\topfretsiz{2.0pt}    % thickness of top fret
 
 % Position of the chord in its bounding box
 \newcommand\xoff{2}             % pos(\xoff,\yoff) is left lower corner of diagram
@@ -120,9 +124,9 @@
 \newcommand\topbar{n}
 \@tfor\modstr:=#1\do 
    { \def\ttest{t}%
-     \ifx\modstr\ttest{\thicklines\put(\xoff,\myvpos){\chline{\truewidth}}\thinlines}%
-     \else {\advance\topline by -2%
-            \put(\xoff,\topline){\hbox to 0pt{\hss\fretposfont\modstr\ }}%
+     \ifx\modstr\ttest{\linethickness{\topfretsiz}\put(\xoff,\myvpos){\chline{\truewidth}}\thinlines}%
+     \else {\advance\topline by -1%
+            \put(\xoff,\topline){\hbox to 0pt{\hss\fretposfont\modstr~}}%
            }%
      \fi%
    }
@@ -175,7 +179,7 @@
   \let\curnote\stdnote
   \let\curfing\fingnote
   \def\Ktest{K}\def\cotest{,}\def\btest{b}\def\ftest{f}
-  \def\stest{s}\def\ptest{p}\def\xtest{x}\def\etest{e}\def\ntest{n}\def\Ltest{t}
+  \def\stest{s}\def\ptest{p}\def\xtest{x}\def\otest{o}\def\etest{e}\def\ntest{n}\def\Ltest{t}
   \def\attest{ }
   \@forc\thisel{#1}{
       \ifx\thisel\Ktest{}
@@ -205,6 +209,14 @@
           \multiply\topline by 2
           \advance\topline by -1
           \put(\ghor,\topline){\hbox to 0pt{\hss{\dampsymbol}\hss}}}
+      \else\ifx\thisel\otest{\put(\ghor,\yoff){\cvline{\numfrets}}
+          \needsize=\ascale
+          \divide\needsize by 2
+          \unitlength\needsize
+          \multiply\ghor by 2
+          \multiply\topline by 2
+          \advance\topline by -1
+          \put(\ghor,\topline){\hbox to 0pt{\hss{\opensymbol}\hss}}}
       \else\ifx\thisel\ntest\put(\ghor,\yoff){\cvline{\numfrets}}
 				 {\needsize=\ascale
 				  \divide\needsize by 2
@@ -254,7 +266,7 @@
              \let\curnote\stdnote
              \let\curfing\fingnote
              \edef\notelabel{}
-      \fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi % one for each in the 'select' loop
+      \fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi % one for each in the 'select' loop
   } % end forc loop
   \ifnum\cpos > \yoff  % draw the last bit of vertical line
      \dlen=\cpos
@@ -267,4 +279,3 @@
 
 % That's all folks!
 %-------------------------------------------------------------------------
-
