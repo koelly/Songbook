@@ -1,34 +1,5 @@
- 
-% Liederbuch für Stamm Staufen von Christopher Köllmayr
-% E-Mail: me@koelly.de
-%
-% WICHTIGE HINWEISE:
-% Um das Liederbuch zu kompilieren ist folgender Ablauf
-% zwingend notwendig:
-% 1. Dokument 2 mal kompilieren: $latex DateiName.tex
-% 2. Im gleichen Verzeichnis wie die .TEX Datei solte die folgende mkidex.ist liegen:
-%    quote ’+’
-%    headings_flag 1
-%    heading_prefix "{\\bf "
-%    heading_suffix "}\\nopagebreak%\n \\indexspace\\nopagebreak%"
-%    delim_0 "\\dotfill "
-%    delim_1 "\\dotfill "
-%    delim_2 "\\dotfill "
-%    delim_r "~--~"
-%    suffix_2p "\\,f."
-%    suffix_3p "\\,ff."
-% 3. Die leeren Dateien langfang.idx und titel.idx anlegen
-% 4. Im gleichen Verzeichnis wie die Liederbuch.tex Datei folgendes
-%    ausführen:   makeindex langfang -s mkidx.ist
-% 5. Im selben Verzeichnis folgendes ausführen:
-%    makeindex titel -s mkidx.ist
-% 6. TEX Datei erneut kompilieren
-% Sollte dies nicht befolgt werden, ist eine kompilierung unmöglich und die Verzeichnisse sind nicht aktuell.
-%
-%
 
-
-\documentclass[10pt]{article}
+\documentclass[10pt,a4paper]{article}
 \usepackage[german]{babel}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
