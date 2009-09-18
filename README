@@ -1,0 +1,53 @@
+SONGBOOK
+===================
+
+1. Einleitung
+2. Mitarbeit
+3. Kompilierung
+4. Lizenz
+
+1. EINLEITUNG
+Das Liederbuch wächst ständig.
+Daher gibt es keinen finalen Stand.
+Viele der Lieder stammen aus dem bisherigen Liederbuch
+des Stamm Staufen (Erding). 
+
+2. MITARBEIT
+Jeder ist herzlich eingeladen mitzuarbeiten.
+
+3. KOMPILIERUNG
+Die Datei "gchords.sty" ist für die Grifftabelle am Ende nötig.
+Durch einen Checkout erhält man eigentlich alle notwendigen Datein.
+Sollte das nicht der Fall sein, müssen die Schritte 3.1 bis 3.7 ausgeführt werden.
+Normalerweise reicht folgendes:
+
+  latex songbook.tex
+  latex songbook.tex
+  makeindex langfang -s mkidx.ist
+  makeindex titel -s mkidx.ist
+  latex songbook.tex
+  pdflatex songbook.tex
+
+3.1. Dokument 2 mal kompilieren: $latex DateiName.tex
+3.2. Im gleichen Verzeichnis wie die .TEX Datei solte die folgende mkidex.ist liegen:
+     quote ’+’
+     headings_flag 1
+     heading_prefix "{\\bf "
+     heading_suffix "}\\nopagebreak%\n \\indexspace\\nopagebreak%"
+     delim_0 "\\dotfill "
+     delim_1 "\\dotfill "
+     delim_2 "\\dotfill "
+     delim_r "~--~"
+     suffix_2p "\\,f."
+     suffix_3p "\\,ff."
+3.3. Die leeren Dateien langfang.idx und titel.idx anlegen
+3.4. Im gleichen Verzeichnis wie die Liederbuch.tex Datei folgendes
+     ausführen:   makeindex langfang -s mkidx.ist
+3.5. Im selben Verzeichnis folgendes ausführen:
+     makeindex titel -s mkidx.ist
+3.6. TEX Datei erneut kompilieren
+3.7. Mit "latexpdf" erneut kompilieren um eine PDF Datei zu erhalten
+
+4. LIZENZ
+CC by-nc-sa 3.0
+http://creativecommons.org/licenses/by-nc-sa/3.0/de/
