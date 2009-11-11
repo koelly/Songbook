@@ -1,0 +1,296 @@
+
+%%#
+%%# Author:
+%%#
+%%# M. V\"ath      vaeth@mathematik.uni-wuerzburg.de
+%%#
+%%# The author thanks
+%%#     Donald Arseneau <asnd@triumf.ca>
+%%#     Dan Luecking    <luecking@uark.edu>
+%%# and a colleague who does not want to be named here.
+
+%%#############################################################################
+%%#
+%%#  guitar.sty - typesetting guitar chords over song texts.
+%%#
+%%#############################################################################
+
+%%#
+%%# This package should run with plain TeX, LaTeX 2.09, and LaTeX 2e.
+%%# Actually, it should actually run with all TeX formats.
+%%#
+
+%%# This is not the only package available for typesetting guitar songs.
+%%# The following packages are also available (and possibly also others:
+%%# I do not claim that this list is complete).
+%%#
+%%# 1. gchords.sty   http://www.damtp.cam.ac.uk/user/kp229/gchords/
+%%# 2. songbook.sty  http://www.rath.ca/Misc/Songbook/
+%%#    or on CTAN:   macros/latex/contrib/supported/songbook/
+%%# 3. guitarTeX (which is not a `pure' (La)TeX solution):
+%%#                  http://rz-home.de/~jmiltz/guitartex/
+%%#
+%%# The packages 1. and 2. have somewhat different intentions.
+%%# It should be possible to combine them with the current package
+%%# without any severe problems.
+
+
+%%# To use guitar, you have to put `guitar.sty' in a path where TeX looks
+%%# for its input files. The TeX documents using guitar need the
+%%# following modifications in their header:
+%%#
+%%# a) If you use LaTeX2.09, use guitar as a style option, e.g.
+%%#      \documentstyle[guitar]{article}
+%%#    or
+%%#      \documentstyle[guitar,12pt]{article}
+%%# b) If you use LaTeX2e, put in the preamble the command
+%%#      \usepackage{guitar}
+%%# c) If you use some other (non-LaTeX) format, you will probably have to
+%%#    insert a line like
+%%#          \catcode`\@=11\input guitar.sty\catcode`\@=12\relax
+%%#
+%%# For TeX-insiders:
+%%# The only LaTeX-specific commands used in `guitar.sty' are:
+%%#
+%%#   \newenvironment
+%%#   \newcommand (only in the form \newcommand{\command}{} to ensure that
+%%#                 \command was not defined before)
+%%#   \newsavebox
+%%#   \newlength
+%%#   \RequirePackage
+%%#   \ProvidesPackage
+%%#   \typeout
+%%#
+%%#   The above commands are used only if they are defined
+%%#   (otherwise, the plainTeX are used).
+%%#
+
+%%#
+%%# Usage:
+%%#
+
+%%# The general usage is very simple:
+%%#
+%%# \guitarChord{Bb}Really. \guitarChord{G#}Oh yes.
+%%#
+%%# This puts the chord "B flat" and "G sharp" over the "R" resp. "O".
+%%# (in the chord, "b" and "#" always translate into "flat" resp. "sharp").
+%%# When you switch into "magic" mode, you can even use [...] instead of
+%%# \guitarChord{...}.
+%%# E.g., in LaTeX, you can just write
+%%#
+%%# \begin{guitar}
+%%# [Cm]This [Bb]is a [G#]very [Gm]simple song.
+%%# You can still use any [\TeX]macros in the chord text.
+%%# Actually, each accord reads a second argument over
+%%# which it is [A]{centered}.
+%%# By default, the linefeeds in the source lead to linebreaks %
+%%# in the output, unless you put a percentage sign at the end of the line. %
+%%# If a single line gets too long, the wrapped lines are right-aligned.
+%%# To force the wrapping use \verb|\newline|\newline like here.
+%%# To stretch the first line, use \verb|\linebreak|\linebreak like here.
+%%#
+%%# Two subsequent linefeeds in the source start a new verse.
+%%#
+%%#
+%%# Three or more subsequent linefeeds in the source start a new verse with a %
+%%# slightly larger space.
+%%#
+%%# Unfortunately, if the chords get too long, they may [Ebm+7]o[G#]verlap.
+%%# To avoid this, the following solutions are supported:
+%%#
+%%# 1. If the token after your chord is a space, like in "[Ebm+7] space",
+%%#    this space is stretched.
+%%#    Note that this is different from the notation "[Ebm+7]{ }space".
+%%# 2. Inside words, put a _ at the end like for [Ebm+7_]O[G#]K.
+%%# 3. Outside words, put a | at the end like for [Ebm+7|]{OK}[G#|].
+%%# If the chord is short enough (compared to its argument) then the symbols
+%%# | and _ do not harm like in [E|]{long} or [E_]{long}er.
+%%#
+%%# You may (and in plainTeX you must) replace "\begin{guitar}" and
+%%# "\end{guitar}" by "\guitarOn" and "\guitarOff", respectively.
+%%#
+%%# If you only want to put the guitar chords as above but do not like the
+%%# feature concerning the linefeeds, you can use the environment
+%%# \begin{guitarMagic}
+%%# \end{guitarMagic}
+%%# or the respective commands \guitarMagicOn and \guitarMagicOff.
+%%# Similarly, you can also use only the linefeed feature by the environment
+%%# \begin{guitarCr}
+%%# \end{guitarCr}
+%%# or the respective commands \guitarCrOn and \guitarCrOff.
+%%#
+%%# As a matter of fact, you can also e.g. use \guitarCrOff *within* a
+%%# {guitar} environment, but then you have to use \guitarCrOn before you
+%%# end the environment to have a proper nesting of modes.
+%%#
+
+%%#
+%%# Customization
+%%#
+
+%%# The output of the "#" and "b" tokens in the chords is generated by the two
+%%# commands
+%%#
+%%#       \guitarSharp
+%%#       \guitarFlat
+%%#
+%%# Thus, for, example the customization
+%%#
+%%#       \def\guitarSharp{$^{\sharp}$}
+%%#
+%%# will make the sharp symbol be written as an upper index.
+
+%%# In a similar way, the macros
+%%#
+%%#       \guitarEndLine
+%%#       \guitarEndPar
+%%#       \guitarEndDoublePar
+%%#
+%%# are expanded when the song text contains one, two, or three (or more)
+%%# linefeeds.\par
+
+%%# After the macro
+%%#
+%%#       \guitarNoChord
+%%#
+%%# has been used, no chords are output anymore. You can make the effect
+%%# local by putting this command in a group. (\guitarNoChord redefines the
+%%# macros which are responsible for the actual output of the chords - see the
+%%# description at the end).
+%%#
+%%# The command
+%%#
+%%#       \guitarPreAccord
+%%#
+%%# is expanded before the actual chord is typeset: You can change this
+%%# definition to e.g. modify the font used for the chord. By default, this
+%%# command contains a \strut which ensures that the lines with chords
+%%# usually all have the same height.
+%%# The macro \guitarPreAccord may also use and modify the macro
+%%#
+%%#       \guitarAccord
+%%#
+%%# which contains the actual chord which is then output (you may use this
+%%# feature to e.g. calculate a modulation in \guitarPreAccord or to
+%%# replace the text of \guitarAccord by some graphic equivalent).
+%%#
+%%# It is guaranteed that the macros \guitarPreAccord and \guitarAccord
+%%# are expanded precisely once.
+%%# In contrast, it might happen that the argument of the chord (i.e. the
+%%# text over which the chord is put) is expanded twice.
+%%# (The doubled expansion could have been avoided, but the price were that
+%%# in some cases the TeX kerning mechanism would then fail if the argument
+%%# is a syllable of some word which is continued afterwards).
+%%#
+%%# Whenever the "guitar" mode or the "linefeed" mode is turned
+%%# on or off, the corresponding macro
+%%#
+%%#       \guitarMagicOnHook
+%%#       \guitarMagicOffHook
+%%#       \guitarCrOnHook
+%%#       \guitarCrOffHook
+%%#
+%%# is expanded (for switching on, the macro is expanded even before the
+%%# necessary catcode changes are done, and for switching off, the macro
+%%# is expanded after the catcodes have been restored).
+%%# In the current defaults, a group is opened and closed in
+%%# \guitarCrOnHook and \guitarCrOffHook: This is the reason why these
+%%# commands must be properly nested.
+%%# (The reason for this group is that"\parindent should be changed locally).
+%%#
+%%# In the current implementation, TeX forgets everything following the magic
+%%# tokens "|" and "_" in the chord (because these symbols are intended to be
+%%# the last one in the chord). If you want to use these tokens within a chord:
+%%# They loose their magic meaning if they occur in a braced context
+%%# (i.e. between { and }). If you regularly have to use these tokens within
+%%# chords, you can change the default choice of this tokens by the respective
+%%# commands
+%%#
+%%#       \toolboxMakeSplit{token}{guitarSplitDist}
+%%#       \toolboxMakeSplit{token}{guitarSplitMerge}
+%%#
+%%# (See the "toolbox" package for details of the command \toolboxMakeSplit
+%%# used here).
+%%# It should be pointed out that {token} may actually be a *sequence*
+%%# of tokens, so that for the `magic tokens' "|" and "_" you may instead use
+%%# whole phrases if you prefer.
+%%#
+%%# Some fine tuning of the spacing can be done by redefining
+%%#
+%%#       \guitarCalcDim
+%%#
+%%# When this macro is called, the skip register
+%%#
+%%#       \guitarDim
+%%#
+%%# contains the width of the chord which should be put over the text.
+%%# After \guitarCalcDim has been expanded, it is ensured that at least
+%%# \guitarDim (horizontal) space is reserved for the chord. Thus, if
+%%# \guitarCalcDim increases e.g. \guitarDim by 2pt (which is the
+%%# default behavior of \guitarCalcDim), then 2pt more space is reserved
+%%# for the chord than its actual size: This ensures that two subsequent
+%%# chords are always separated by some space.
+%%#
+%%# Finally, you can modify the macros which do the actual setting of the
+%%# chords: This setting is done by the commands
+%%#
+%%#       \guitarPut
+%%#       \guitarPutOnSpace
+%%#       \guitarPutDist
+%%#       \guitarPutMerge
+%%#
+%%# which with the exception of \guitarPutOnSpace all expect one argument
+%%# (namely the text on which they should be put). The command
+%%# \guitarPutOnSpace is called, if a space followed the chord argument.
+%%# Similarly, \guitarPutDist and \guitarPutMerge are called if the chord
+%%# argument ended with the magic symbol "|" respectively "_".
+%%# Before one of the above four macros is called, the chord text is stored in
+%%# the macro \guitarAccord (and has not been expanded to this time); also the
+%%# argument has not been expanded to this time. The above four macros are also
+%%# responsible for the appropriate expansion (also of the expansion of the
+%%# macros \guitarCalcDim and \guitarPreAccord, if
+%%# the latter should still keep their meaning).
+%%# The above four macros may freely use the skip register \guitarDim and the
+%%# box register \guitarBox (which are both not used or
+%%# modified by the other macros of this package).
+%%#
+
+%%#
+%%# Possible Problems:
+%%#
+
+%%# The special treatment of [ # b and linefeed is realized by a changing of
+%%# catcodes. This may cause essentially two sorts of problems:
+%%#
+%%# 1. In some cases, you will want to avoid the automatic replacement of '#'
+%%#    and 'b'. For example, in [\textbf{F#}] or in \guitarChord{\textbf{F#}}
+%%#    the "b" of "\textbf" gets replaced which is of course not what you want.
+%%#    To avoid this replacement, there is a  * version of the respective
+%%#    commands, i.e. the above example works in the intended way if you write
+%%#    instead [*\textbf{F\guitarSharp}] or
+%%#    \guitarChord*{\textbf{F\guitarSharp}}
+%%#    (you have to use the command "\guitarSharp", because due to the * also
+%%#    the # would not be replaced).
+%%#
+%%# 2. There are some situations in which catcodes are set too early,
+%%#    e.g. if you use the macros within the argument of certain macros.
+%%#    In this case, these symbols keep their usual \TeX\ meaning
+%%#    (which may either lead to an error in case of "#" (and sometimes "[") or
+%%#    just to a false output). If this happens to you, you have to replace at
+%%#    the corresponding place the above one-symbol shortcuts by their longer
+%%#    macro equivalents. In other words: You might have to replace in
+%%#    certain special situations some occurrences of the symbols according to
+%%#    the following table:
+%%#
+%%#    [...]        ->   \guitarChord{...}
+%%#    #            ->   \guitarSharp
+%%#    b            ->   \guitarFlat
+%%#    linefeed     ->   \guitarEndLine
+%%#    2 linefeeds  ->   \guitarEndPar
+%%#    3+ linefeeds ->   \guitarEndDoublePar
+%%#
+
+\endinput
+%%
+%% End of file `guitar.txt'.
