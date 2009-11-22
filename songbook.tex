@@ -1,21 +1,29 @@
-\documentclass[10pt,a5paper]{article}
+\documentclass[10pt,a5paper,twoside, cleardoubleplain]{scrbook}
 \usepackage[german]{babel}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
-\usepackage[left=1cm,right=1cm,top=0cm,bottom=1cm,includeheadfoot]{geometry}
+\usepackage[left=1cm,right=1cm,top=0.5cm,bottom=1cm,includeheadfoot]{geometry}
 \usepackage{multind}
-\usepackage{graphicx}
-\usepackage{scrtime}
-\usepackage{setspace}
-\usepackage{guitar}
 
+%Für die Bilder
+\usepackage{graphicx}
+
+%Für die Uhrzeit & Datum
+\usepackage{scrtime}
+
+%Um Zeilenabstände zu varieren
+\usepackage{setspace}
+
+%Nötig für die Notation:
+% lala [e]lulu[A] laaaaa
+\usepackage{./packages/guitar}
 
 
 %Dieses Package ermöglicht es, am Ende die Chord/Tab Übersicht
 %zu erstellen. Um Das Package zu benutzen, muss die .sty Datei einfach
 % im gleichen Verzeichnis liegen wie das .tex File.
 %Quelle: http://www.aei.mpg.de/~peekas/gchords/
-\usepackage{gchords}
+\usepackage{./packages/gchords}
 
 
 %für alphabetische Liste am Ende
@@ -23,16 +31,38 @@
 \makeindex{titel}
 
 
-%obsolete Packages:
-%\makeindex
-%\usepackage{makeidx}
-%\usepackage{index}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% KOPF- und FUßZEILE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
 
+%Kopfzeilen
+%% Auf den EVEN Seiten
+\fancyhead[RE]{Stamm Staufen}  %--> EVEN: rechts
+\fancyhead[LE]{Bombadil - Seite \thepage} %--> EVEN links
 
+\fancyhead[LO]{Stamm Staufen}  %--> ODD: links
+\fancyhead[RO]{Bombadil - Seite \thepage} %--> ODD: rechts
+
+%Linie oben
+\renewcommand{\headrulewidth}{0.5pt}
+
+%Fußzeile außen
+\fancyfoot[RO]{\thepage} % RO --> EVEN: rechts
+\fancyfoot[LE]{\thepage} % LE --> ODD: links
+
+%Linie unten
+\renewcommand{\footrulewidth}{0.5pt}
 
 
 \begin{document}
 \begin{center}
+
+%Titelseite braucht keine Header und Footer
+\thispagestyle{empty}
+
 
 \textbf{\begin{LARGE}Stamm Staufen \end{LARGE}
 \\ Liederbuch
@@ -55,12 +85,16 @@ $ \\
 \textbf{Anmerkung}
 Dieses Liederbuch entsteht gerade erst!\\
 Viele Lieder sind noch nicht kontrolliert.\\
-\\
-
 
 
 
 \newpage
+
+Gemacht von, für, weil, und deshalb!
+
+\newpage
+
+Dieses Buch gehört Bla bla und er ist voll stolz drauf!
 
 %Inhaltsverzeichnis
 \tableofcontents
@@ -77,42 +111,20 @@ Viele Lieder sind noch nicht kontrolliert.\\
   
 \subsection{3 Chinesen}
 \index{titel}{3 Chinesen}
-\index{langfang}{Drei Chinesen mit dem Kontrabass \ldots}
-\begin{tabbing}
-Dr\=ei Chinesen mit dem K\=ontrabaß s\=aßen auf der Straße und er\=zählten sich was. \kill
-\>E\>H\>H7\>E\\
-Drei Chinesen mit dem Kontrabaß saßen auf der Straße und erzählten sich was. \\
-
-Da kam die Polizei : Ja, was \=ist denn das? \=Drei Chi\=nesen mit dem K\=ontrabaß.\kill
-\>A\>H\>H7\>E\\
-Da kam die Polizei : Ja, was ist denn das? Drei Chinesen mit dem Kontrabaß.\\
-\\
-Dro Chonoson mot dom Kontroboß soßon of dor Stroßo ond orzohlton soch wos.\\
-Do kom do Polozo: Jo, wos ost donn dos? Dro Chonoson mot dom Kontroboß!\\
-\\
-Dre Chenesen met dem . . .\\
-\\
-Drü Chünüsün müt düm . . .\\
-\\
-Drau Chaunausaun maut daum . . .\\
-\\
-usw.
-\end{tabbing}
+\index{langfang}{Drei Chinesen mit dem \ldots}
 
 \begin{guitar}
-Dr[E]ei Chinesen mit dem K[H]ontrabaß s[H7]aßen auf der Straße und er[E]zählten sich was.\\
-Da kam die Polizei : Ja, was [A]ist denn das? [H]Drei Chi[H7]nesen mit dem K[E]ontrabaß.\\\
-\\
-Dro Chonoson mot dom Kontroboß soßon of dor Stroßo ond orzohlton soch wos.\\
+Dr[E]ei Chinesen mit dem K[H]ontrabaß s[H7]aßen auf der Straße und er[E]zählten sich was.
+Da kam die Polizei : Ja, was [A]ist denn das? [H]Drei Chi[H7]nesen mit dem K[E]ontrabaß.\\
+
+Dro Chonoson mot dom Kontroboß soßon of dor Stroßo ond orzohlton soch wos.
 Do kom do Polozo: Jo, wos ost donn dos? Dro Chonoson mot dom Kontroboß!\\
-\\
-Dre Chenesen met dem . . .\\
-\\
-Drü Chünüsün müt düm . . .\\
-\\
-Drau Chaunausaun maut daum . . .\\
-\\
-usw.
+
+Dre Chenesen met dem \ldots
+
+Drü Chünüsün müt düm \ldots
+
+Drau Chaunausaun maut daum \ldots
 \end{guitar}
 
   	
@@ -122,51 +134,40 @@ usw.
 \subsection{3 Glänzende Kugeln}
 \index{titel}{3 Glänzende Kugeln}
 \index{langfang}{Es liegen 3 glänzenden Kugeln \ldots}
-\begin{tabbing}
-Es li\=egen drei gl\=änzende Ku\=geln, ich we\=iß nicht wora\=us gemac\=ht, \kill
-\>a\>E\>a\>d\>E\>a\\
-Es liegen drei glänzende Kugeln, ich weiß nicht woraus gemacht, \\
+\begin{guitar}
+Es li[a]egen drei gl[E]aenzende Ku[a]geln, ich we[d]iß nicht wora[E]us gemac[a]ht,
+in einer n[E]iedrigen Kn[a]eipe, neun Mei[d]len hi[E]nter der Na[a]cht.
+Die liegen auf grünem T[E]uch und a[a]n der Wand hängt der Spr[E]uch:   ~~~~~  [E7]
+\\
 
-in einer n\=iedrigen Kn\=eipe, neun Mei\=len hi\=nter der Na\=cht. \kill
-\>E\>a\>d\>E\>a\\
-in einer niedrigen Kneipe, neun Meilen hinter der Nacht. \\
+  W[F]er die Kugeln ro[G]llen läßt, d[d]aradardirid[C]um,
+  d[F]en überkomme die schw[C]arze Pest, d[E]arada[E7]dirid[a]um.
 
-Die liegen auf grünem T\=uch und a\=n der Wand hängt der Spr\=uch:   ~~~~~  \=\kill
-\>E\>a\>E\>E7\\
-Die liegen auf grünem Tuch und an der Wand hängt der Spruch: \\
 \\
-W\=er die Kugeln ro\=llen läßt, d\=aradardirid\=um, \kill
-\>F\>G\>d\>C\\
-Wer die Kugeln rollen läßt, daradardiridum, \\
+Der Wirt, der hat nur ein Auge, und das trägt er hinter dem Ohr.
+Aus seinem gespaltenen Kopfe ragt eine Antenne hervor.
+Er trinkt aus einer Seele und ruft aus roter Kehle:
 
-d\=en überkomme die schw\=arze Pest, d\=arada\=dirid\=um.\kill
-\>F\>C\>E\>E7\>a\\
-den überkomme die schwarze Pest, daradadiridum.\\
-\\
-Der Wirt, der hat nur ein Auge, und das trägt er hinter dem Ohr. \\
-Aus seinem gespaltenen Kopfe ragt eine Antenne hervor. \\
-Er trinkt aus einer Seele und ruft aus roter Kehle: \\
-\\
-Wer die... \\
-\\
-Die einen sagen, die Kugeln sind die Sonne, die Erde, der Mond. \\
-Die anderen glauben, sie seien das Feuer, die Angst und der Tod. \\
-Und wenn sie beisammen sind, dann summen sie in den Wind :\\ 
-\\
-Wer die Kugeln rollen läßt. . .\\
-\\
-Und dann kam einer geritten, es war in dem Jahr vor der Zeit, \\
-auf einer gesattelten Wolke von hinter der Ewigkeit. \\
-Er nahm von der Wand einen Queue, der Wirt rief krächzend : "He ! "\\
-\\
-Wer... \\
-\\
-Doch jener, der lachte zwei Donner und wachste den knöchernen Stab, \\
-visierte und stieß, und die Kugeln prallten aneinander, der Wirt grub ein Grab. \\
-Fäulnis flatterte auf, so nahm alles seinen Lauf.\\ 
-\\
-Wer die Kugeln rollen läßt. . .\\
-\end{tabbing}
+~~~Wer die Kugeln rollen läßt \ldots
+
+Die einen sagen, die Kugeln sind die Sonne, die Erde, der Mond.
+Die anderen glauben, sie seien das Feuer, die Angst und der Tod. 
+Und wenn sie beisammen sind, dann summen sie in den Wind :
+
+~~~Wer die Kugeln rollen läßt \ldots
+
+Und dann kam einer geritten, es war in dem Jahr vor der Zeit,
+auf einer gesattelten Wolke von hinter der Ewigkeit.
+Er nahm von der Wand einen Queue, der Wirt rief krächzend : "He ! "
+
+~~~Wer die Kugeln rollen läßt \ldots
+
+Doch jener, der lachte zwei Donner und wachste den knöchernen Stab, 
+visierte und stieß, und die Kugeln prallten aneinander, der Wirt grub ein Grab. 
+Fäulnis flatterte auf, so nahm alles seinen Lauf.
+
+~~~Wer die Kugeln rollen läßt \ldots
+\end{guitar}
   	  
 
 \newpage  
@@ -175,43 +176,32 @@ Wer die Kugeln rollen läßt. . .\\
 \subsection{99 Luftballons}
 \index{titel}{99 Luftballons}
 \index{langfang}{Hast du etwas Zeit für mich \ldots}
-\begin{tabbing}
-\=Hast Du etwas \=Zeit für mich dann \=singe ich ein \=Lied für Dich\kill
-\>E\>f\#\>A\>H7\\
-Hast Du etwas Zeit für mich dann singe ich ein Lied für Dich\\
+\begin{guitar}
+[E]Hast Du etwas [f#]Zeit für mich dann [A]singe ich ein [H7]Lied für Dich
+Von [E]99 L[f#]uftballons auf [A]ihrem Weg zum [H7]Horizont
+[E]Denkst Du vielleicht [f#]grad' an mich dann [a]singe ich ein [H7]Lied für Dich
+Von [E]99 L[f#]uftballons und [A]dass sowas von [H7]so was kommt
 
-Von \=99 L\=uftballons auf \=ihrem Weg zum \=Horizont\kill
-\>E\>f\#\>A\>H7\\
-Von 99 Luftballons auf ihrem Weg zum Horizont\\
+99 Luftballons auf ihrem Weg zum Horizont
+Hielt man für UFOs aus dem All darum schickte ein General
+'ne Fliegerstaffel hinterher Alarm zu geben, wenn's so wär
+Dabei war'n da am Horizont nur 99 Luftballons
 
-\=Denkst Du vielleicht \=grad' an mich dann \=singe ich ein \=Lied für Dich\kill
-\>E\>f\#\>A\>H7\\
-Denkst Du vielleicht grad' an mich dann singe ich ein Lied für Dich\\
+99 Düsenflieger jeder war ein grosser Krieger
+Hielten sich für Captain Kirk das gab ein grosses Feuerwerk
+Die Nachbarn haben nichts gerafft und fühlten sich gleich angemacht
+Dabei schoss man am Horizont auf 99 Luftballons
 
-Von \=99 L\=uftballons und \=dass sowas von \=so was kommt\kill
-\>E\>f\#\>A\>H7\\
-Von 99 Luftballons und dass sowas von sowas kommt\\
-\\
-99 Luftballons auf ihrem Weg zum Horizont\\
-Hielt man für UFOs aus dem All darum schickte ein General\\
-'ne Fliegerstaffel hinterher Alarm zu geben, wenn's so wär\\
-Dabei war'n da am Horizont nur 99 Luftballons\\
-\\
-99 Düsenflieger jeder war ein grosser Krieger\\
-Hielten sich für Captain Kirk das gab ein grosses Feuerwerk\\
-Die Nachbarn haben nichts gerafft und fühlten sich gleich angemacht\\
-Dabei schoss man am Horizont auf 99 Luftballons\\
-\\
-99 Kriegsminister streichholz und Benzinkanister\\
-Hielten sich für schlaue Leute witterten schon fette Beute\\
-Riefen: Krieg und wollten Macht mann, wer hätte das gedacht\\
-Dass es einmal soweit kommt wegen 99 Luftballons\\
-\\
-99 Jahre Krieg ließen keinen Platz für Sieger\\
-Kriegsminister gibt's nicht mehr und auch keine Düsenflieger\\
-Heute zieh ich meine Runden seh' die Welt in Trümmern liegen\\
-Hab' 'nen Luftballon gefunden denk' an Dich und lass' ihn fliegen \\
-\end{tabbing}
+99 Kriegsminister streichholz und Benzinkanister
+Hielten sich für schlaue Leute witterten schon fette Beute
+Riefen: Krieg und wollten Macht mann, wer hätte das gedacht
+Dass es einmal soweit kommt wegen 99 Luftballons
+
+99 Jahre Krieg ließen keinen Platz für Sieger
+Kriegsminister gibt's nicht mehr und auch keine Düsenflieger
+Heute zieh ich meine Runden seh' die Welt in Trümmern liegen
+Hab' 'nen Luftballon gefunden denk' an Dich und lass' ihn fliegen
+\end{guitar}
 
   	  
 \newpage  
@@ -220,49 +210,28 @@ Hab' 'nen Luftballon gefunden denk' an Dich und lass' ihn fliegen \\
 \subsection{Abends, wenn das Licht verweht}
 \index{titel}{Abends, wenn das Licht verweht}
 \index{langfang}{Abends, wenn das Licht verweht \ldots}
-\begin{tabbing}
-\=Abends, wenn das Tages\=licht ver\=weht\kill
-\>A\>D\>A\\
-Abends, wenn das Tageslicht verweht\\
 
-und der Mond am Himmel steht,\kill
-\>E\>A\\
-und der Mond am Himmel steht,\\
+\begin{guitar}
+[A]Abends, wenn das Tages[D]licht ver[A]weht
+[E]und der Mond am Himm[A]el steht,
+[Dsitze[E]n wir am Lagerfeuer, [A]ringsum schweigt die Welt,
+[D]nur der Wind sein [E]Abendlied er[A]zählt.
 
-\=sitze\=n wir am Lagerfeuer, \=ringsum schweigt die Welt,\kill
-\>D\>E\>A\\
-sitzen wir am Lagerfeuer, ringsum schweigt die Welt,\\
+[A]Flammen schlagen hoch [D]wie ein Fa[A]nal,
+[E]Lieder klingen durch das [A]Tal.
+[D]Lieder aus der Heimat und von [E]allem, was uns [A]lieb,
+[D]leise der Gesang [E]zum Himmel [A]zieht.
 
-\=nur der Wind sein \=Abendlied er\=zählt.\kill
-\>D\>E\>A\\
-nur der Wind sein Abendlied erzählt.\\
-\\
-\=Flammen schlagen hoch \=wie ein Fa\=nal,\kill
-\>A\>D\>A\\
-Flammen schlagen hoch wie ein Fanal,\\
+Wo auch unser Lagerfeuer brennt
+unterm mächt’gen Firmament,
+sind vergessen alle Trübsal, aller Herzen’s Not, 
+in uns Glaube, Treue, Freundschaft gloht.
 
-\=Lieder klingen durch das \=Tal.\kill
-\>E\>A\\
-Lieder klingen durch das Tal.\\
-
-\=Lieder aus der Heimat und von \=allem, was uns \=lieb,\kill
-\>D\>E\>A\\
-Lieder aus der Heimat und von allem, was uns lieb,\\
-
-\=leise der Gesang \=zum Himmel \=zieht.\kill
-\>D\>E\>A\\
-leise der Gesang zum Himmel zieht.\\
-\\
-Wo auch unser Lagerfeuer brennt\\
-unterm mächt’gen Firmament,\\
-sind vergessen alle Trübsal, aller Herzen’s Not, \\
-in uns Glaube, Treue, Freundschaft gloht.\\
-\\
-Und es öffnet sich die weite Welt\\
-bis hinauf zum Sternenzelt,\\
-Lieder klingen durch die Lande weit und breit,  \\
-schlagen Brücken über Raum und Zeit.\\
-\end{tabbing}
+Und es öffnet sich die weite Welt
+bis hinauf zum Sternenzelt,
+Lieder klingen durch die Lande weit und breit,
+schlagen Brücken über Raum und Zeit.
+\end{guitar}
 
 
 \newpage  
@@ -270,116 +239,56 @@ schlagen Brücken über Raum und Zeit.\\
 
 \subsection{Alles aus Liebe}
 \index{titel}{Alles aus Liebe}
-\index{langfang}{Ich würde Dir gern sagen, wie sehr \ldots}
-\begin{tabbing}
-\=Ich würde dir gern sagen, wie \=sehr ich dich mag,\kill
-\>C\>a\\
-Ich würde dir gern sagen, wie sehr ich dich mag,\\
-
-
-\=warum ich nur noch an dich \=denken kann.\kill
-\>F\>G\\
-warum ich nur noch an dich denken kann.\\
-
-
-\=Ich fühl mich wie verhext und in Ge\=fangenschaft\kill
-\>C\>a\\
-Ich fühl mich wie verhext und in Gefangenschaft\\
-
-
-Alles und \=du allein trägst \=Schuld daran.\kill
-\>F\>G\\
-Alles und du allein trägst Schuld daran.\\
-
-
-\=Worte sind d\=afür zu schwach,\kill
-\>a\>F\\
-Worte sind dafür zu schwach,\\
-
-
-ich be\=fürchte, du glaubst mir \=nicht.\kill
-\>G\>E\\
-ich befürchte, du glaubst mir nicht.\\
-
-
-Mir kommt es \=vor, als ob mich \=jemand warnt,\kill
-\>a\>F\\
-Mir kommt es vor, als ob mich jemand warnt,\\
-
-
-dieses \=Märchen wird nicht gut ausgehen.\kill
-\>G\\
-dieses Märchen wird nicht gut ausgehen.\\
-
-
-Es ist die \=Eifersucht, die \=mich auffrisst,\kill
-\>C\>a\\
-Es ist die Eifersucht, die mich auffrisst\\
-
-
-immer \=dann, wenn du nicht in meiner \=Nähe bist.\kill
-\>F\>G\\
-immer dann, wenn du nicht in meiner Nähe bist.\\
-
-
-Von \=Dr. Jekyll werde ich zu \=Mr. Hyde,\kill
-\>C\>a\\
-Von Dr. Jekyll werde ich zu Mr. Hyde,\\
-
-
-ich kann \=nichts dagegen tun, plötzlich \=ist es so weit.\kill
-\>F\>G\\
-ich kann nichts dagegen tun, plötzlich ist es so weit.\\
+\index{langfang}{Ich würde Dir gern sagen \ldots}
+\begin{guitar}
+[C]Ich würde dir gern sagen, wie [a]sehr ich dich mag, 
+[F]warum ich nur noch an dich [G]denken kann.
+[C]Ich fühl mich wie verhext und in Ge[a]fangenschaft
+Alles und [F]du allein trägst [G]Schuld daran.
+[a]Worte sind d[F]afür zu schwach,
+ich be[G]fürchte, du glaubst mir [E]nicht.
+Mir kommt es [a]vor, als ob mich [F]jemand warnt,
+dieses [G]Märchen wird nicht gut ausgehen.
 \\
-
-Ich bin \=kurz davor \=durchzudrehn, aus \=Angst, dich zu ver\=liern.\kill
-\>a\>F\>G\>E\\
-Ich bin kurz davor durchzudrehn, aus Angst, dich zu verliern.\\
-
-
-Und \=dass uns jetzt kein \=Unglück geschieht, dafür \=kann ich nicht garantiern.\kill
-\>a\>F\>G\\
-Und dass uns jetzt kein Unglück geschieht, dafür kann ich nicht garantiern.\\
+Es ist die [C]Eifersucht, die [a]mich auffrisst,
+immer [F]dann, wenn du nicht in meiner [G]Nähe bist.
+Von [C]Dr. Jekyll werde ich zu [a]Mr. Hyde,
+ich kann [F]nichts dagegen tun, plötzlich [G]ist es so weit.
+Ich bin [a]kurz davor [F]durchzudrehn, aus [G]Angst, dich zu ver[E]liern.
+Und [a]dass uns jetzt kein [F]Unglück geschieht, dafür [G]kann ich nicht garantiern.
 \\
-
-
-Und alles \=nur\=, weil ich dich \=liebe, und ich nicht \=weiß, wie ich's \=beweisen \=soll.\kill
-\>C\>E\>a\>C\>F\>G\\
-Und alles nur, weil ich dich liebe, und ich nicht weiß, wie ich's beweisen soll.\\
-
-
-Komm, ich \=zeig dir, wie \=groß meine \=Liebe \=ist, und \=bringe mich für dich \=um.\kill
-\>C\>E\>a\>F\>G\>C\\
-Komm, ich zeig dir, wie groß meine Liebe ist, und bringe mich für dich um.\\
-
+Und alles [C]nur[E], weil ich dich [a]liebe, 
+und ich nicht [C]weiß, wie ich's [F]beweisen [G]soll.
+Komm, ich [C]zeig dir, wie [E]groß meine [a]Liebe [F]ist, 
+und [G]bringe mich für dich [C]um.
 \\
-Sobald deine Laune etwas schlechter ist,\\
-bild ich mir gleich ein, dass du mich nicht mehr willst.\\
-Ich sterbe beim Gedanken daran,\\
-dass ich dich nicht für immer halten kann.\\
-Auf einmal brennt ein Feuer in mir\\
-und der Rest der Welt wird schwarz.\\
-Ich spür wie unsere Zeit verrinnt,\\
-wir nähern uns dem letzten Akt.\\
-\\
-Und alles nur, weil ich dich liebe,\\
-und ich nicht weiß, wie ich's beweisen soll.\\
-Komm, ich zeig dir, wie groß meine Liebe ist,\\
-und bringe mich für dich um.\\
-\\
-Ich bin kurz davor durchzudrehn,\\
-aus Angst, dich zu verliern.\\
-Und dass uns jetzt kein Unglück geschieht,\\
-dafür kann ich nicht garantiern.\\
-\\
-Und alles nur, weil ich dich liebe,\\
-und ich nicht weiß, wie ich's beweisen soll.\\
-Komm, ich zeig dir, wie groß meine Liebe ist\\
-und bringe mich für dich um.\\
-\\
-Komm, ich zeig dir, wie groß meine Liebe ist,\\
+Sobald deine Laune etwas schlechter ist,
+bild ich mir gleich ein, dass du mich nicht mehr willst.
+Ich sterbe beim Gedanken daran,
+dass ich dich nicht für immer halten kann.
+Auf einmal brennt ein Feuer in mir
+und der Rest der Welt wird schwarz.
+Ich spür wie unsere Zeit verrinnt,
+wir nähern uns dem letzten Akt.
+
+Und alles nur, weil ich dich liebe,
+und ich nicht weiß, wie ich's beweisen soll.
+Komm, ich zeig dir, wie groß meine Liebe ist,
+und bringe mich für dich um.
+
+Ich bin kurz davor durchzudrehn,
+aus Angst, dich zu verliern.
+Und dass uns jetzt kein Unglück geschieht,
+dafür kann ich nicht garantiern.
+
+Und alles nur, weil ich dich liebe,
+und ich nicht weiß, wie ich's beweisen soll.
+Komm, ich zeig dir, wie groß meine Liebe ist
+und bringe mich für dich um.
+
+Komm, ich zeig dir, wie groß meine Liebe ist,
 und bringe uns beide um.
-\end{tabbing}
+\end{guitar}
 
   	
 \newpage  
@@ -387,54 +296,34 @@ und bringe uns beide um.
 \subsection{Albatros}
 \index{titel}{Albatros}
 \index{langfang}{Wir sind Kameraden \ldots}
-\begin{tabbing}
-Wir \=sind Kame\=raden, wir \=halten fest zu\=sammen, \kill
-\>C\>e\>a\>e\\
-Wir sind Kameraden, wir halten fest zusammen, \\
-
-eg\=al ob bei \=Tag oder \=Nac\=ht. \kill
-\>a\>C\>d\>G\\
-egal ob bei Tag oder Nacht. \\
-
-Wir \=führen die \=Lilie in \=unserer \=Fahn' \kill
-\>C\>e\>a\>e\\ 
-Wir führen die Lilie in unserer Fahn' \\
-
-und \=ziehen immer \=munter \=unsere \=Bahn.\= \kill
-\>a\>C\>d\>G\>G7\\
-und ziehen immer munter unsere Bahn.\\
+\begin{guitar}
+Wir [C]sind Kame[e]raden, wir [a]halten fest zu[e]sammen,
+eg[a]al ob bei [C]Tag oder [d]Nac[G]ht.
+Wir [C]führen die [e]Lilie in [a]unserer [e]Fahn'
+und [a]ziehen immer [C]munter [d]unsere [G]Bahn.[G7]
 \\
-
-|: Ja \=frei wie ein \=Albatros ziehen \=wir durch die \=Welt.\kill
-\>C\>G\>a\>e\\
-|: Ja frei wie ein Albatros ziehen wir durch die Welt.\\
-
-Heute \=hier, morgen dort, gerade \=wie es uns gefällt. \kill
-\>C\>F\\
-Heute hier, morgen dort, gerade wie es uns gefällt. \\
-
-Ja so \=frei ist die \=Pfadfinder\=ei. :|\kill
-\>C\>G7\>C\\
-Ja so frei ist die Pfadfinderei. :|\\
+|: Ja [C]frei wie ein [G]Albatros ziehen [a]wir durch die [e]Welt.
+~~ Heute [F]hier, morgen dort, gerade [C]wie es uns gefällt.
+~~ Ja so [C]frei ist die [G7]Pfadfinder[C]ei. :|
 \\
-Wir sind weit gezogen übers Meer und übers Land, \\
-auf staubigen Straßen und Sand.\\
-Ein lustiges Lied, das ist immer dabei. \\
-Es soll allen zeigen: Ja, wir sind frei!\\
+Wir sind weit gezogen übers Meer und übers Land,
+auf staubigen Straßen und Sand.
+Ein lustiges Lied, das ist immer dabei.
+Es soll allen zeigen: Ja, wir sind frei!
 \\
-|: Ja frei wie ein Albatros ziehen wir durch die Welt.\\
-~~~ Heute hier, morgen dort, gerade wie es uns gefällt. \\
-~~~ Ja so frei ist die Pfadfinderei. :|\\
+|: Ja frei wie ein Albatros ziehen wir durch die Welt.
+~~ Heute hier, morgen dort, gerade wie es uns gefällt. 
+~~ Ja so frei ist die Pfadfinderei. :|
 \\
-Und sollten wir uns einmal trennen, dann bleibt\\
-die Erinnerung an Stunden bestehen.\\
-An Stunden der Freude, an Stunden der Not \\
-und die Hoffnung auf ein Wiedersehn.\\
+Und sollten wir uns einmal trennen, dann bleibt
+die Erinnerung an Stunden bestehen.
+An Stunden der Freude, an Stunden der Not 
+und die Hoffnung auf ein Wiedersehn.
 \\
-|: Ja frei wie ein Albatros ziehen wir durch die Welt.\\
-~~~ Heute hier, morgen dort, gerade wie es uns gefällt. \\
-~~~ Ja so frei ist die Pfadfinderei. :|\\
-\end{tabbing}
+|: Ja frei wie ein Albatros ziehen wir durch die Welt.
+~~ Heute hier, morgen dort, gerade wie es uns gefällt. 
+~~ Ja so frei ist die Pfadfinderei. :|
+\end{guitar}
 
   	
   	  
@@ -443,120 +332,42 @@ und die Hoffnung auf ein Wiedersehn.\\
 \subsection{Alles nur geklaut}
 \index{titel}{Alles nur geklaut}
 \index{langfang}{Ich schreibe einen Hit \ldots}
-\begin{tabbing}
+\begin{guitar}
 
-\=Eo , eo. \=Eo. \=Eo , eo. \=Eo.\kill
-\>e\>C\>e\>C\\
-Eo , eo. Eo. Eo , eo. Eo.\\
+[e]Eo , eo. [C]Eo. [e]Eo , eo. [C]Eo.
 
-
-\=Ich schreibe einen Hit , die ganze \=Nation \=kennt ihn schon:\kill
-\>e\>G\>D\\
-Ich schreibe einen Hit , die ganze Nation kennt ihn schon:\\
-
-
-\=Alle singen mit ganz \=laut im Chor , das \=geht ins Ohr.\kill
-\>e\>G\>D\\
-Alle singen mit. "Eo , eo!" ganz laut im Chor , das geht ins Ohr.\\
-
-
-Keiner \=kriegt davon ge\=nug , alle h\=alten mich für k\=lug ,\kill
-\>C\>G\>C\>G\\
-Keiner kriegt davon genug , alle halten mich für klug ,\\
-
-
-\=hoffentlich merkt kei\=ner den Betrug!\=\kill
-\>C\>G\>H\\
-hoffentlich merkt keiner den Betrug!\\
+[e]Ich schreibe einen Hit , die ganze [G]Nation [D]kennt ihn schon:
+[e]Alle singen mit ganz [G]laut im Chor , das [D]geht ins Ohr.
+Keiner [C]kriegt davon ge[G]nug , alle h[C]alten mich für k[G]lug,
+[C]hoffentlich merkt kei[G]ner den Betrug![H]
 \\
-Denn das ist alles nur gek\=laut ,(Eo , eo.) das ist \=alles gar nicht m\=eines!(Eo.)\kill
-\>e\>D\>C\\
-Denn das ist alles nur geklaut ,(Eo , eo.) das ist alles gar nicht meine!(Eo.)\\
-
-
-Das ist \=alles nur gekl\=aut ,(Eo , eo.) doch das weiß \=ich nur ganz all\=eine!(Eo.)\kill
-\>D\>e\>D\>C\\
-Das ist alles nur geklaut ,(Eo , eo.) doch das weiß ich nur ganz alleine!(Eo.)\\
-
-Das ist alles nur \=geklaut und ges\=tohlen, nur gez\=ogen und gerau\=bt.\kill
-\>G\>D\>C\>H\\
-Das ist alles nur geklaut und gestohlen , nur gezogen und geraubt.\\
-
-
-Entsc\=huldigung , das \=hab ich mir erlaub\=t.~~~~~\=~~~~~~\=~~~~~\= \kill
-\>D\>H\>e\>D\>D\#\>e\\
-Entschuldigung , das hab ich mir erlaubt.\\
+Denn das ist alles nur gek[e]laut ,(Eo , eo.) das ist [D]alles gar nicht m[C]eines!(Eo.)
+Das ist [D]alles nur gekl[e]aut ,(Eo , eo.) doch das weiß [D]ich nur ganz all[C]eine!(Eo.)
+Das ist alles nur [G]Geklaut und ges[D]tohlen, nur gez[C]ogen und gerau[H]bt.
+Entsc[D]huldigung, das [H]hab ich mir erlaub[e]t.~~~~~[D]~~~~~~[D#]~~~~~[e]
 \\
-
-
-\=Ich bin tierisch reich: Ich fahre \=einen Benz, \kill
-\>e\>G\\
-Ich bin tierisch reich: Ich fahre einen Benz, \\
-
-
-der in der \=Sonne glänzt, \=ich hab 'nen großen Teich\kill
-\>D\>e\\
-der in der Sonne glänzt, ich hab 'nen großen Teich\\
-
-
-und d\=avor ein Schloß und ein \=weißes Ross. Ich \=bin ein großer \=Held\kill
-\>G\>D\>C\>G\\
-und davor ein Schloß und ein weißes Ross. Ich bin ein großer Held\\
-
-
-und \=reise um die \=Welt, ich \=werde immer \=schöner \=durch mein \=Geld.\kill
-\>C\>G\>C\>G\>A\>H\\
-und reise um die Welt, ich werde immer schöner durch mein Geld.\\
+[e]Ich bin tierisch reich: Ich fahre [G]einen Benz, der in der [D]Sonne glänzt,
+[e]ich hab 'nen großen Teichund d[G]avor ein Schloß und ein [D]weißes Ross. 
+Ich [C]bin ein großer [G]Held und [C]reise um die [G]Welt, 
+ich [C]werde immer [G]schöner [A]durch mein [H]Geld.
 \\
-~~~~~ Doch das ist alles nur geklaut \ldots \\
+~~~~ Doch das ist alles nur geklaut \ldots
 \\
-\=Ich will gern verführn, doch bald schon \=merke ich:\kill
-\>e\>G\\
-Ich will gern verführn, doch bald schon merke ich:\\
-
-
-Das wird nicht \=leicht für mich. \=Ich geh mit dir spaziern\kill
-\>D\>e\\
-Das wird nicht leicht für mich. Ich geh mit dir spaziern\\
-
-
-und spreche \=ein Gedicht in \=dein Gesicht. Ich sag: "Ich \=schrieb es nur für \=dich!"\kill
-\>G\>D\>C\>G\\
-und spreche ein Gedicht in dein Gesicht. Ich sag: "Ich schrieb es nur für dich!"\\
-
-
-\=und dann küsst du \=mich , denn \=zu meinem \=Glück \=weißt du \=nicht:\kill
-\>C\>G\>C\>G\>a\>H\\
-und dann küsst du mich , denn zu meinem Glück weißt du nicht:\\
+[e]Ich will gern verführn, doch bald schon [D]merke ich: Das wird nicht [D]leicht für mich. 
+[e]Ich geh mit dir spaziern und spreche [G]ein Gedicht in [D]dein Gesicht. 
+Ich sag: "Ich [C]schrieb es nur für [G]dich!" [C]und dann küsst du [G]mich , 
+denn [C]zu meinem [G]Glück [a]weißt du [H]nicht:
 \\
-~~~~~Doch das ist alles nur geklaut \ldots\\
+~~~~~Doch das ist alles nur geklaut \ldots
 \\
-\=Auf deinen Heiligenschein fall ich nicht mehr \=rein,\kill
-\>e\>C\\
-Auf deinen Heiligenschein fall ich nicht mehr rein,\\
-
-\=denn du hast Gott sei Dank noch was im \=Schrank.\kill
-\>e\>C\\
-denn du hast Gott sei Dank noch was im Schrank.\\
+[e]Auf deinen Heiligenschein fall ich nicht mehr [C]rein,
+[e]denn du hast Gott sei Dank noch was im [C]Schrank.
 \\
-Denn du hast alles nur gekl\=aut ,(Eo , eo.)  das ist \=alles gar nicht \=deines(Eo.)\kill
-\>e\>D\>C\\
-Denn du hast alles nur geklaut ,(Eo , eo.)  das ist alles gar nicht deines(Eo.)\\
-
-Das ist \=alles nur ge\=klaut, doch das weisst \=du nur ganz al\=leine\kill
-\>D\>e\>D\>C\\
-Das ist alles nur geklaut, doch das weisst du nur ganz alleine\\
-
-
-Das ist alles nur \=geklaut und ges\=tohlen, nur gez\=ogen und gerau\=bt.\kill
-\>G\>D\>C\>H\\
-Das ist alles nur geklaut und gestohlen , nur gezogen und geraubt.\\
-
-
-Entsc=huldigung , wer hat dir das erlaub\=t.\kill
-\>e\\
-Entschuldigung , wer hat dir das erlaubt.\\
-\end{tabbing}
+Denn du hast alles nur gekl[e]aut ,(Eo , eo.)  das ist [D]alles gar nicht [C]deines(Eo.)
+Das ist [D]alles nur ge[e]klaut, doch das weisst [D]du nur ganz a[C]lleine
+Das ist alles nur [G]geklaut und ges[D]tohlen, nur gez[C]ogen und gerau[H]bt.
+Entsc[D]huldigung , wer hat dir das erlaub[e]t.
+\end{guitar}
 
   	
 \newpage  
@@ -609,7 +420,7 @@ Ossa, Ossa, schöne \ldots
 
 \subsection{Über den Wolken}
 \index{titel}{Über den Wolken}
-\index{langfang}{Wind Nord/Ost, Startbahn null drei \ldots}
+\index{langfang}{Wind Nord/Ost, Startbahn \ldots}
 \begin{tabbing}
 Wind \=Nord/Ost, Startbahn null d\=rei, b\=is hier hör' ich die Mot\=oren.\kill
 \>G\>a\>D\>G\\
@@ -674,7 +485,7 @@ Wolken spiegeln sich darin, ich wär' gerne mitgeflogen.\\
   	
 \subsection{Bella Ciao}
 \index{titel}{Bella Ciao}
-\index{langfang}{An ihrer Schulter, da wird es hell  \ldots}
+\index{langfang}{An ihrer Schulter, da wird es \ldots}
 \begin{tabbing}
 An ihrer S\=chulter, da wird es hell schon,\kill
 \>a\\
@@ -834,7 +645,7 @@ Der kleine Troll macht unsre Träume so schwer.\\
   	
     \subsection{Der Pfeiffer}
   \index{titel}{Der Pfeiffer}
-  \index{langfang}{Ich kam aus San Alfredo im letzten \ldots}
+  \index{langfang}{Ich kam aus San Alfredo im \ldots}
   \begin{tabbing}
 
 Ich \=kam aus San Alfredo im \=letzten Tages\=licht,\kill
@@ -969,7 +780,7 @@ weil sonst die ganze Bande brüllt: Wo ist die Kokosnuß...\\
   	
     \subsection{Die freie Republik}
   \index{titel}{Die freie Republik}
-  \index{langfang}{In einem Kerker saßen zu Frankfurt \ldots}
+  \index{langfang}{In einem Kerker saßen zu \ldots}
   \begin{tabbing}
 \=In einem Kerker saßen zu Fr\=ankfurt an dem M\=ain.\kill
 \>C\>G7\>C\\
@@ -1058,7 +869,7 @@ und denken dabei: Die Gedanken sind frei !\\
   	
     \subsection{Elche}
   \index{titel}{Elche}
-  \index{langfang}{Abends treten Elche aus den Dünen \ldots}
+  \index{langfang}{Abends treten Elche \ldots}
   \begin{tabbing}
 \=Abends treten \=Elche aus den \=Dünen,\kill
 \>a\>d\>a\\
@@ -1279,7 +1090,7 @@ stimmt schon heut oder morgen nicht mehr.\\
   	
     \subsection{Hier kommt Alex}
   \index{titel}{Hier kommt Alex}
-  \index{langfang}{In einer Welt in der man nur noch \ldots}
+  \index{langfang}{In einer Welt in der man \ldots}
   \begin{tabbing}
 In einer W\=elt, in der man nur noch lebt, da\=mit man täglich roboten geht,\kill
 \>a\>F\\
@@ -1383,7 +1194,7 @@ Ich wäre ja so gerne noch geblieben, aber der Wagen, der rollt.\\
   	
     \subsection{Horch was kommt von draussen rein}
   \index{titel}{Horch was kommt von draussen rein}
-  \index{langfang}{Horch was kommt von draussen rein \ldots}
+  \index{langfang}{Horch was kommt von draussen \ldots}
   \begin{tabbing}
 H\=orch, was kommt von draußen rein, holah\=i, holah\=o,\kill
 \>C\>G\>C\\
@@ -1799,7 +1610,7 @@ Laßt uns lieber Räuber werden … - O la la, aber, aber, nanu!\\
   	
     \subsection{Marmor, Stein und Eisen bricht}
   \index{titel}{Marmor, Stein und Eisen bricht}
-  \index{langfang}{Weine nicht wenn der Regen fällt \ldots}
+  \index{langfang}{Weine nicht wenn der \ldots}
   \begin{tabbing}
 \=Weine nicht, wenn der Regen fällt, dam-\=dam, dam-\=dam\kill
 \>A\>E7\>A\\
@@ -1964,7 +1775,7 @@ drum sag' ich dir denk' bitte stets daran\\
   	
     \subsection{Nehmt Abschied Brüder}
   \index{titel}{Nehmt Abschied Brüder}
-  \index{langfang}{Nehmt Abschied Brüder, ungewiss \ldots}
+  \index{langfang}{Nehmt Abschied Brüder \ldots}
   \begin{tabbing}
 Nehmt A\=bschied, Brüder, \=ungewiss ist \=alle Wiederk\=ehr,\kill
 \>C\>G\>C\>F\\
@@ -2134,7 +1945,7 @@ Ref.:\\
   	
     \subsection{Skandal im Sperrbezirk}
   \index{titel}{Skandal im Sperrbezirk}
-  \index{langfang}{In München steht ein Hofbräuhaus \ldots}
+  \index{langfang}{In München steht ein \ldots}
   \begin{tabbing}
 In M\=ünchen steht ein Hofbräuhaus doch F\=reudenhäuser müssen raus\kill
 \>A\>G\\
@@ -2313,7 +2124,7 @@ um es wieder zu lernen, oh man ist das schön. \\
   	
     \subsection{Sturm und Drang}
   \index{titel}{Sturm und Drang}
-  \index{langfang}{Jeden Morgen fragt das junge Leben \ldots}
+  \index{langfang}{Jeden Morgen fragt das junge \ldots}
   \begin{tabbing}
 J\=eden Morgen fragt das j\=unge Leben, w\=as der T\=ag ihm b\=ringt,\kill
 \>a\>d\>a\>E\>a\\
@@ -3346,7 +3157,7 @@ beneath the Rising Sun.\\
   	
     \subsection{Hymn}
   \index{titel}{Hymn}
-  \index{langfang}{Valley's deep and the mountain's so high \ldots}
+  \index{langfang}{Valley's deep and the \ldots}
   Intro:  E  Esus4  E  E Esus4  E
 \begin{tabbing}
 \=Valley's deep and the \=mountain's so \=high\kill
@@ -3709,7 +3520,7 @@ about the times I won't have to say.\\
   	
     \subsection{Lemon tree}
   \index{titel}{Lemon tree}
-  \index{langfang}{I'm sitting here in a boring room \ldots}
+  \index{langfang}{I'm sitting here in a boring \ldots}
   \begin{tabbing}
 Intro: Am x4 Em x4 Am x4 Em x4 Dm7 x4 Em x4 Am x2 Em x2 Am x4\\
 \\
@@ -3852,7 +3663,7 @@ Let it be, let it be, ..... \\
   	
     \subsection{Living next door to Alice}
   \index{titel}{Living next door to Alice}
-  \index{langfang}{Sally called, when she got the word \ldots}
+  \index{langfang}{Sally called, when she got \ldots}
   \begin{tabbing}
 S\=ally called, when she got the word,\kill
 \>A\\
@@ -3933,7 +3744,7 @@ No, I'll never get used to not living next door to Alice...\\
   	
     \subsection{Mrs. Robinson}
   \index{titel}{Mrs. Robinson}
-  \index{langfang}{And here's to you, Mrs. Robinson \ldots}
+  \index{langfang}{And here's to you, Mrs. \ldots}
   \begin{tabbing}
 Refrain: \\
 And here's to \=you, Mrs. R\=obinson,\kill
@@ -4309,7 +4120,7 @@ We are sailing stormy waters, to be near you, to be free.\\
   	
     \subsection{Time of your life}
   \index{titel}{Time of your life}
-  \index{langfang}{Another turning point, A fork stuck \ldots}
+  \index{langfang}{Another turning point, A fork \ldots}
   by Green Day\\
 \begin{tabbing}
 \=Another turning \=point, A fork stu\=ck in the road\=\kill
@@ -4358,7 +4169,7 @@ I hope you had the time of your life\\
   	
     \subsection{Under the bridge}
   \index{titel}{Under the bridge}
-  \index{langfang}{Sometimes I feel like I don't have a partner \ldots}
+  \index{langfang}{Sometimes I feel like I don't \ldots}
   \begin{tabbing}
 \=Sometimes I f\=eel like I d\=on't have a p\=artner\kill
 \>E\>H\>cis\>A\\
@@ -4415,7 +4226,7 @@ Under the bridge downtown i gave my life away\\
   	
     \subsection{Whiskey in the jar}
   \index{titel}{Whiskey in the jar}
-  \index{langfang}{As I was going over the far famed \ldots}
+  \index{langfang}{As I was going over the far \ldots}
   \begin{tabbing}
 
 As I\= was going over the f\=ar famed Kerry mountains,\kill
@@ -4489,7 +4300,7 @@ Chorus\\
   	
     \subsection{Wild Rover}
   \index{titel}{Wild Rover}
-  \index{langfang}{I've been a wild rover for many's the year \ldots}
+  \index{langfang}{I've been a wild rover for \ldots}
   \begin{tabbing}
 I've b\=een a wild rover for many's the y\=ear\kill
 \>G\>C\\
@@ -4545,7 +4356,7 @@ then I never will play the wild rover no more\\
   	
     \subsection{Wind of change}
   \index{titel}{Wind of change}
-  \index{langfang}{I follow the Moskva down to Gorky Park \ldots}
+  \index{langfang}{I follow the Moskva down to \ldots}
   \begin{tabbing}
 
 \=~~~~~~~~~~~~~~\=~~~\=~~~~~~\=~~~\=~~~~~~\=~~~\=~~~~~~\=~~~\=~~~\=~~~\= \kill
@@ -4738,7 +4549,7 @@ We all live in a \ldots\\
   	
     \subsection{Yesterday}
   \index{titel}{Yesterday}
-  \index{langfang}{Yesterday, all my troubles seemed so far away \ldots}
+  \index{langfang}{Yesterday, all my troubles \ldots}
   \begin{tabbing}
 \=Yesterday\=, all my \=troubles seemed so \=far aw\=ay\kill
 \>C\>E\>E7\>a\>G\\
@@ -4779,17 +4590,13 @@ Mm mm mm mm mm mm mm............\\
   	
   	  
      \newpage  
-  	
-    \newpage
- \section{Sonstige Lieder}
-  
+
    \newpage
- \section{Sonstiges}
-  
-   \subsection{Chords}
+
+\section{Chords}
   \index{titel}{Chords}
 %  \index{langfang}{ \ldots}
-  \mediumchords
+  \smallchords
 \chords{
 	\chord{t}{x,p3,p2,n,p1,n}{\textbf{C}}
 	\chord{t}{x,p3,p2,p3,p1,n}{\textbf{C7}}
