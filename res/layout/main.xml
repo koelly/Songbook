@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@+id/RelativeLayout01"
+	android:layout_width="wrap_content" 
+	android:layout_height="wrap_content">
+
+
+<TextView 
+	android:text="Purin und Harnsäure Index"
+	android:id="@+id/TextView01"
+	android:textSize="20dp"
+	android:textStyle="bold"  
+	android:gravity="center"
+	android:padding="15dp"
+	android:layout_width="fill_parent"
+	android:layout_height="wrap_content">
+</TextView>
+
+
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:padding="10dp"
+    android:stretchColumns="*"
+    android:gravity="center">
+    <TableRow
+	android:layout_width="fill_parent" 
+    android:layout_height="fill_parent">
+        <Button 
+        	android:text="Fleisch" 
+        	android:id="@+id/meat" 
+        	android:layout_width="75dp" 
+        	android:layout_height="50dp">
+        </Button>
+		
+		<Button 
+			android:text="Fisch" 
+			android:id="@+id/fish" 
+			android:layout_width="75dp"
+        	android:layout_height="50dp">
+		</Button>
+	</TableRow>
+
+    <TableRow>
+        <Button 
+        	android:text="Obst" 
+        	android:id="@+id/fruits" 
+			android:layout_width="75dp"
+			android:layout_height="50dp">
+        </Button>
+		
+		<Button 
+			android:text="Gemüse" 
+			android:id="@+id/vegetables" 
+        	android:layout_width="75dp" 
+        	android:layout_height="50dp">
+		</Button>
+		
+    </TableRow>/>		
+
+    <TableRow>
+    	<Button 
+			android:text="Getränke" 
+			android:id="@+id/beverage" 
+        	android:layout_width="75dp" 
+        	android:layout_height="50dp">
+		</Button>
+    
+    	<Button 
+			android:text="Sonstiges" 
+			android:id="@+id/miscellaneous" 
+			android:layout_width="75dp"
+        	android:layout_height="50dp">
+		</Button>
+    
+    </TableRow>
+        <Button 
+			android:text="Suche" 
+			android:id="@+id/search" 
+			android:layout_width="75dp"
+        	android:layout_height="50dp">
+		</Button>
+  
+</TableLayout>
+</RelativeLayout>

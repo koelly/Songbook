@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="hello">Hello World, gichtl!</string>
+    <string name="app_name">Gichtl</string>
+    <string name="details_title">Details</string>
+    <string name="ListThem_title">Übersicht</string>
+</resources>
