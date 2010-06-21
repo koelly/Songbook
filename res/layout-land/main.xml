@@ -22,6 +22,7 @@
 <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+	
     android:padding="10dp"
     android:stretchColumns="*"
     android:gravity="center">
@@ -33,8 +34,8 @@
 
 	<ImageView 
 		android:id="@+id/meat" 
-		android:layout_width="90dp" 
-		android:layout_height="90dp"
+		android:layout_width="70dp" 
+		android:layout_height="70dp"
 		android:cropToPadding="false"
  		android:scaleType="centerInside"
  		android:src="@drawable/meat">
@@ -42,40 +43,37 @@
 		
 	<ImageView 
 		android:id="@+id/fish" 
-		android:layout_width="90dp" 
-		android:layout_height="90dp"
+		android:layout_width="70dp" 
+		android:layout_height="70dp"
 		android:cropToPadding="false"
  		android:scaleType="centerInside"
  		android:src="@drawable/fish">
+	</ImageView>
+
+	<ImageView 
+		android:id="@+id/fruit" 
+		android:layout_width="70dp" 
+		android:layout_height="70dp"
+		android:cropToPadding="false"
+ 		android:scaleType="centerInside"
+ 		android:src="@drawable/fruit">
 	</ImageView>
 	</TableRow>
 
     <TableRow>
 	<ImageView 
-		android:id="@+id/fruit" 
-		android:layout_width="90dp" 
-		android:layout_height="90dp"
-		android:cropToPadding="false"
- 		android:scaleType="centerInside"
- 		android:src="@drawable/fruit">
-	</ImageView>
-		
-	<ImageView 
 		android:id="@+id/vegetable" 
-		android:layout_width="90dp" 
-		android:layout_height="90dp"
+		android:layout_width="70dp" 
+		android:layout_height="70dp"
 		android:cropToPadding="false"
  		android:scaleType="centerInside"
  		android:src="@drawable/vegetable">
 	</ImageView>
 		
-    </TableRow>/>		
-
-    <TableRow>
 	<ImageView 
 		android:id="@+id/beverage" 
-		android:layout_width="90dp" 
-		android:layout_height="90dp"
+		android:layout_width="70dp" 
+		android:layout_height="70dp"
 		android:cropToPadding="false"
  		android:scaleType="centerInside"
  		android:src="@drawable/beverage">
@@ -83,8 +81,8 @@
     
     <ImageView 
 		android:id="@+id/miscellaneous" 
-		android:layout_width="90dp" 
-		android:layout_height="90dp"
+		android:layout_width="70dp" 
+		android:layout_height="70dp"
 		android:cropToPadding="false"
  		android:scaleType="centerInside"
  		android:src="@drawable/sonstiges">
@@ -92,7 +90,7 @@
     
     </TableRow>
     <TableRow
-    android:paddingTop="30dp">
+    android:paddingTop="20dp">
 	</TableRow>
 	
 	<Button 

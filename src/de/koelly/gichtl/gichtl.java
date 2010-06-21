@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.ImageView;
 
 public class gichtl extends Activity implements OnClickListener {
 	ProgressDialog myProgressDialog = null;
@@ -78,24 +79,24 @@ public class gichtl extends Activity implements OnClickListener {
 	        settingsEditor.putBoolean("firstRun", false);
 	        settingsEditor.commit();
          }
-	        
-        Button b_meat = (Button) findViewById(R.id.meat);
-        b_meat.setOnClickListener(this);
+
+        ImageView iv_meat = (ImageView)findViewById(R.id.meat);
+        iv_meat.setOnClickListener(this);
         
-        Button b_fish = (Button) findViewById(R.id.fish);
-        b_fish.setOnClickListener(this);
+        ImageView iv_fish = (ImageView)findViewById(R.id.fish);
+        iv_fish.setOnClickListener(this);
         
-        Button b_fruits = (Button) findViewById(R.id.fruits);
-        b_fruits.setOnClickListener(this);
+        ImageView iv_fruit = (ImageView)findViewById(R.id.fruit);
+        iv_fruit.setOnClickListener(this);
         
-        Button b_vegetables = (Button) findViewById(R.id.vegetables);
-        b_vegetables.setOnClickListener(this);
+        ImageView iv_vegetable = (ImageView)findViewById(R.id.vegetable);
+        iv_vegetable.setOnClickListener(this);
         
-        Button b_beverage = (Button) findViewById(R.id.beverage);
-        b_beverage.setOnClickListener(this);
+        ImageView iv_beverage = (ImageView)findViewById(R.id.beverage);
+        iv_beverage.setOnClickListener(this);
         
-        Button b_miscellaneous = (Button) findViewById(R.id.miscellaneous);
-        b_miscellaneous.setOnClickListener(this);
+        ImageView iv_miscellaneous = (ImageView)findViewById(R.id.miscellaneous);
+        iv_miscellaneous.setOnClickListener(this);
         
         Button b_search = (Button) findViewById(R.id.search);
         b_search.setOnClickListener(this);
@@ -121,13 +122,13 @@ public class gichtl extends Activity implements OnClickListener {
 	        	startActivity(i);				
 	        	break;	
 	        	
-			case R.id.vegetables:
+			case R.id.vegetable:
 	        	bundle.putString("category", "vegetables");
 	        	i.putExtras(bundle);
 	        	startActivity(i);				
 	        	break;
 			
-			case R.id.fruits:
+			case R.id.fruit:
 	        	bundle.putString("category", "fruits");
 	        	i.putExtras(bundle);
 	        	startActivity(i);				

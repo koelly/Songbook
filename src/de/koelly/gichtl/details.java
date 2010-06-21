@@ -1,10 +1,14 @@
 package de.koelly.gichtl;
 
 import android.app.Activity;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.WindowManager;
 import android.widget.RelativeLayout;
@@ -34,13 +38,13 @@ public class details extends Activity{
 		db.close();
 		return cursor;
 	}
-	
+
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.details);
-        
+            
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_BLUR_BEHIND, WindowManager.LayoutParams.FLAG_BLUR_BEHIND);
         
         Bundle bundle = this.getIntent().getExtras();
@@ -68,6 +72,7 @@ public class details extends Activity{
         	break;
         }
         
+        
         RelativeLayout rl = (RelativeLayout)findViewById(R.id.rl);
         rl.setBackgroundColor(bgColor);
 
@@ -79,8 +84,6 @@ public class details extends Activity{
 
         this.setTitle(nameOfMeal);
         dbHelper.close();
-        
-        
-        
+
     }
 }

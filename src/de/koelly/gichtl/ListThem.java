@@ -47,7 +47,23 @@ public class ListThem extends ListActivity{
     	  names4list[i] = name + " (" + uric_acid + "mg/100g)";
     	  names[i++] = name;
       }
+      
+      String tmp = null;
+      if (TABLE_NAME.equalsIgnoreCase("fish")){
+    	  tmp = "Fisch";
+      }else if (TABLE_NAME.equalsIgnoreCase("meat")){
+    	  tmp = "Fleisch";
+      }else if (TABLE_NAME.equalsIgnoreCase("fruits")){
+    	  tmp = "Früchte";
+      }else if (TABLE_NAME.equalsIgnoreCase("vegetables")){
+    	  tmp = "Gemüse";
+      }else  if (TABLE_NAME.equalsIgnoreCase("beverage")){
+    	  tmp = "Getränke";
+      }else if (TABLE_NAME.equalsIgnoreCase("miscellaneous")){
+    	  tmp = "Vermischtes";
+      }
 
+      this.setTitle("Übersicht " + tmp);
       
       setListAdapter(new ArrayAdapter<String>(this, R.layout.list_item, names4list));
       ListView lv = getListView();
