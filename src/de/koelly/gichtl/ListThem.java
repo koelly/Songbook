@@ -77,7 +77,6 @@ public class ListThem extends ListActivity{
         	//Quelle: http://www.balistupa.com/blog/2009/08/passing-data-or-parameter-to-another-activity-android/
         	Intent i = new Intent(ListThem.this, details.class);
         	Bundle bundle = new Bundle();
-        	//bundle.putString("name", (String) ((TextView) view).getText());
         	bundle.putString("name", names[position]);
         	bundle.putString("table", TABLE_NAME);
         	i.putExtras(bundle);

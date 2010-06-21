@@ -26,8 +26,6 @@ public class MySearchableActivity extends ListActivity{
 
 	    if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
 	      String query = intent.getStringExtra(SearchManager.QUERY);
-	      //doMySearch(query);
-	      //TODO Implement FTS3 Fulltext search
 	     
 	      Log.d("Gichtl Suche:", query);
 	      DataBaseHelper dbHelper = new DataBaseHelper(this);
@@ -61,7 +59,6 @@ public class MySearchableActivity extends ListActivity{
 	      }
 	      ListView lv = getListView();
 	      lv.setTextFilterEnabled(true);
-	      lv.setBackgroundColor(Color.WHITE);
 	      cursor.close();	      
 	      
 	      lv.setOnItemClickListener(new OnItemClickListener() {
